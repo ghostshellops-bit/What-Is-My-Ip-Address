@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const TIMEOUT_MS = 3000;
-const CACHE_TIME = 60; // seconds
 
-function fetchWithTimeout(url: string, timeout = TIMEOUT_MS) {
+async function fetchWithTimeout(url: string, timeout = TIMEOUT_MS) {
   return Promise.race([
     fetch(url),
-    new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), timeout)),
+    new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error('Timeout')), timeout)
+    ),
   ]);
 }
 
@@ -23,36 +24,48 @@ export async function GET(req: NextRequest) {
   const IPQS_TOKEN = process.env.IPQS_TOKEN;
   const IP_API_URL = process.env.IP_API_URL || 'http://ip-api.com/json';
 
-  // ✅ Only call ip-api.com (fastest)
-  // Fallback to ipinfo if needed
-  let ipApi = {};
-  let ipInfo = {};
-  let ipqs = {};
+  // ✅ Explicitly typed as any to avoid TypeScript errors
+  let ipApi: any = {};
+  let ipInfo: any = {};
+  let ipqs: any = {};
 
+  // 1. Try ip-api.com (fastest)
   try {
-    const res = await fetchWithTimeout(`${IP_API_URL}/${ip}?fields=status,country,regionName,city,zip,lat,lon,isp,org,as,asname,timezone,mobile,proxy,hosting,query`);
+    const res = await fetchWithTimeout(
+      `${IP_API_URL}/${ip}?fields=status,country,regionName,city,zip,lat,lon,isp,org,as,asname,timezone,mobile,proxy,hosting,query`
+    );
     if (res && typeof res === 'object' && 'json' in res) {
-      ipApi = await (res as any).json();
+      ipApi = await (res as Response).json();
     }
-  } catch (e) { console.error('ip-api failed:', e); }
-
-  // Try ipinfo as fallback
-  if (!ipApi || !ipApi.city) {
-    try {
-      const res = await fetchWithTimeout(`https://ipinfo.io/${ip}/json?token=${IPINFO_TOKEN}`);
-      if (res && typeof res === 'object' && 'json' in res) {
-        ipInfo = await (res as any).json();
-      }
-    } catch (e) { console.error('ipinfo failed:', e); }
+  } catch (e) {
+    console.error('ip-api failed:', e);
   }
 
-  // Try IPQS for security data
-  try {
-    const res = await fetchWithTimeout(`https://ipqualityscore.com/api/json/ip/${IPQS_TOKEN}/${ip}?strictness=1`);
-    if (res && typeof res === 'object' && 'json' in res) {
-      ipqs = await (res as any).json();
+  // 2. Fallback to ipinfo if ip-api didn't return city
+  if (!ipApi || !ipApi.city) {
+    try {
+      const res = await fetchWithTimeout(
+        `https://ipinfo.io/${ip}/json?token=${IPINFO_TOKEN}`
+      );
+      if (res && typeof res === 'object' && 'json' in res) {
+        ipInfo = await (res as Response).json();
+      }
+    } catch (e) {
+      console.error('ipinfo failed:', e);
     }
-  } catch (e) { console.error('IPQS failed:', e); }
+  }
+
+  // 3. Try IPQS for security data
+  try {
+    const res = await fetchWithTimeout(
+      `https://ipqualityscore.com/api/json/ip/${IPQS_TOKEN}/${ip}?strictness=1`
+    );
+    if (res && typeof res === 'object' && 'json' in res) {
+      ipqs = await (res as Response).json();
+    }
+  } catch (e) {
+    console.error('IPQS failed:', e);
+  }
 
   const result = {
     ip: ip,
@@ -80,11 +93,10 @@ export async function GET(req: NextRequest) {
     timestamp: new Date().toISOString(),
   };
 
-  // ✅ Cache response for 60 seconds
   return NextResponse.json(result, {
     status: 200,
     headers: {
-      'Cache-Control': `s-maxage=${CACHE_TIME}, stale-while-revalidate`,
+      'Cache-Control': 's-maxage=60, stale-while-revalidate',
     },
   });
 }
