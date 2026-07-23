@@ -140,25 +140,25 @@ export default function WHOISLookupPage() {
         </div>
 
         {/* Affiliate Offer */}
-        <div className="my-8">
-          <h3 className="text-sm font-orbitron text-ghost-cyan mb-3">🔍 Domain Intelligence Tools</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <AffiliateOffer
-              title="Namecheap WHOIS - Domain Registration"
-              title="Register your domain with privacy protection."
-              buttonText="Search Domains"
-              link="https://www.namecheap.com/"
-              icon="🌐"
-            />
-            <AffiliateOffer
-              title="WhoisXML API - Professional WHOIS Data"
-              description="Comprehensive WHOIS data and domain intelligence."
-              buttonText="Learn More"
-              link="https://www.whoisxmlapi.com/"
-              icon="📊"
-            />
-          </div>
-        </div>
+<div className="my-8">
+  <h3 className="text-sm font-orbitron text-ghost-cyan mb-3">🔍 Domain Intelligence Tools</h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <AffiliateOffer
+      title="Namecheap WHOIS - Domain Registration"
+      description="Register your domain with privacy protection."
+      buttonText="Search Domains"
+      link="https://www.namecheap.com/domains/whois/"
+      icon="🔍"
+    />
+    <AffiliateOffer
+      title="Whois Lookup - Domain Info"
+      description="Get detailed domain registration information."
+      buttonText="Lookup Now"
+      link="https://who.is/"
+      icon="🌐"
+    />
+  </div>
+</div>
 
         {/* Related Tools */}
         <div className="mt-8">

@@ -24,7 +24,7 @@ export default function AdUnit({
 
   useEffect(() => {
     try {
-      if (typeof window !== 'undefined' && window.adsbygoogle) {
+      if (typeof window !== 'undefined' && (window as any).adsbygoogle) {
         ;(window.adsbygoogle = window.adsbygoogle || []).push({})
       }
     } catch (e) {

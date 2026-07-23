@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Clock, Globe, MapPin, Sun, Moon, Search } from 'lucide-react'
+import { ArrowRight, Clock, Globe, MapPin, Sun, Moon, Search, RefreshCw } from 'lucide-react'
 import AdBanner from '../components/AdBanner'
 import AffiliateOffer from '../components/AffiliateOffer'
 

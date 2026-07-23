@@ -47,10 +47,15 @@ export async function GET(req: NextRequest) {
       const apiUrl = api.url(url, api.key);
       console.log(`🔍 Trying ${api.name}...`);
 
-      const res = await fetch(apiUrl, {
-        headers: api.headers || {},
-        signal: AbortSignal.timeout(15000),
-      });
+      // Filter out headers with undefined values
+const headers = Object.fromEntries(
+  Object.entries(api.headers || {}).filter(([_, v]) => v !== undefined)
+) as HeadersInit;
+
+const res = await fetch(apiUrl, {
+  headers,
+  signal: AbortSignal.timeout(15000),
+});
 
       if (res.ok) {
         console.log(`✅ ${api.name} succeeded!`);
