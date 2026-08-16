@@ -6,8 +6,8 @@ import AffiliateOffer from '../components/AffiliateOffer'
 
 export const metadata = {
   title: 'Email Reputation Check - Analyze Email Risk Score',
-  description: 'Check email reputation. Verify email risk, spam score, and domain intelligence.',
-  keywords: 'email reputation, email risk score, email intelligence, domain reputation, email security',
+  description: 'What is my IP address? Check email reputation and risk score. Verify spam likelihood and domain trust for better email security and deliverability.',
+  keywords: 'email reputation, email risk score, email intelligence, domain reputation, email security, what is my ip',
 }
 
 export default function EmailReputationPage() {

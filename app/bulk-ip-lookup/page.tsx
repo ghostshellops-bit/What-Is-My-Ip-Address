@@ -3,8 +3,8 @@ import { BulkLookupClient } from '../components/BulkLookupClient';
 
 export const metadata: Metadata = {
   title: 'Bulk IP Lookup - Check Multiple IP Addresses at Once',
-  description: 'Paste up to 10 IPs and scan them simultaneously for location, ISP, and fraud score.',
-  keywords: 'bulk ip lookup, multiple ip check, ip batch lookup, check many ips',
+  description: 'What is my IP address? Bulk lookup up to 10 IPs at once. Get location, ISP, ASN, and fraud scores instantly for your network diagnostics.',
+  keywords: 'bulk ip lookup, multiple ip check, ip batch lookup, check many ips, what is my ip',
 };
 
 export default function Page() {

@@ -5,9 +5,9 @@ import AdBanner from '../components/AdBanner'
 import AffiliateOffer from '../components/AffiliateOffer'
 
 export const metadata = {
-  title: 'WHOIS Lookup - Get Domain & IP Ownership Information',
-  description: 'Get WHOIS information and domain details. Lookup domain registration, ownership, and IP allocation information.',
-  keywords: 'whois lookup, whois, domain lookup, ip ownership, domain registration',
+  title: 'WHOIS Lookup - Domain & IP Ownership Information',
+  description: 'What is my IP address? Get WHOIS information for any domain or IP. Find registrant details, registrar, creation, and expiry dates.',
+  keywords: 'whois lookup, whois, domain lookup, ip ownership, domain registration, what is my ip',
 }
 
 export default function WHOISLookupPage() {

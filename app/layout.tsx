@@ -24,15 +24,12 @@ const jetbrainsMono = JetBrains_Mono({
 // AUTO-DETECT DOMAIN FUNCTION
 // ============================================
 function getBaseUrl() {
-  // For Vercel preview deployments
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
-  // For production custom domain
   if (process.env.NEXT_PUBLIC_SITE_URL) {
     return process.env.NEXT_PUBLIC_SITE_URL;
   }
-  // For local development
   return 'http://localhost:3000';
 }
 
@@ -101,9 +98,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${orbitron.variable} ${jetbrainsMono.variable}`}>
       <head>
-        {/* ==========================================
-            PRECONNECT - Faster external resource loading
-            ========================================== */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -114,27 +108,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://ipinfo.io" />
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
 
-        {/* ==========================================
-            DNS PREFETCH
-            ========================================== */}
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="dns-prefetch" href="https://api.ip-api.com" />
         <link rel="dns-prefetch" href="https://ipinfo.io" />
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
-        {/* ==========================================
-            FAVICON
-            ========================================== */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-<link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
-<link rel="apple-touch-icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
 
-        {/* ==========================================
-            GOOGLE ANALYTICS (GA4)
-            ========================================== */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+          src="https://www.googletagmanager.com/gtag/js?id=G-WD6G7V39CM"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -142,22 +127,67 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
+            gtag('config', 'G-WD6G7V39CM');
           `}
         </Script>
 
-        {/* ==========================================
-            ADSTERRA ADS (Replace with your ad code)
-            ========================================== */}
         <Script
-          id="adsterra-ads"
+          id="adsterra-native"
           strategy="afterInteractive"
+          src="https://pl30498079.effectivecpmnetwork.com/995d18c4798c9af8de26491554ce1723/invoke.js"
+          async
+          data-cfasync="false"
+        />
+
+        <Script
+          id="adsterra-728x90"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
-              // Replace this with your Adsterra code
-              console.log('Adsterra ads placeholder');
+              atOptions = {
+                'key' : '9a5e2cd62beda5f7492f2418aefb7cf9',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+              };
             `,
           }}
+        />
+        <Script
+          id="adsterra-300x250"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              atOptions = {
+                'key' : '6037271c62b96f350c930908c8b302ed',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+              };
+            `,
+          }}
+        />
+        <Script
+          id="adsterra-160x300"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              atOptions = {
+                'key' : '974582bc3515ea1a7284415a414c69ec',
+                'format' : 'iframe',
+                'height' : 300,
+                'width' : 160,
+                'params' : {}
+              };
+            `,
+          }}
+        />
+        <Script
+          id="adsterra-banner-invoke"
+          strategy="lazyOnload"
+          src="https://www.highperformanceformat.com/9a5e2cd62beda5f7492f2418aefb7cf9/invoke.js"
         />
       </head>
       <body className="min-h-screen bg-ghost-dark text-white">

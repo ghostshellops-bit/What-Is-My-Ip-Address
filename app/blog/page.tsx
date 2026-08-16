@@ -3,12 +3,11 @@ import Link from 'next/link'
 import { ArrowRight, Calendar } from 'lucide-react'
 
 export const metadata = {
-  title: 'Blog - What Is My IP',
-  description: 'Latest articles, news, and updates from What Is My IP.',
+  title: 'Blog - What Is My IP Address? Articles & Guides',
+  description: 'What is my IP address? Read expert articles on IP lookup, VPNs, DNS leaks, ASN, and online privacy. Stay informed about your digital identity.',
 }
 
 const posts = [
-  // ===== NEW POSTS (ADDED) =====
   {
     title: 'What Is My IP Address? A Complete Guide',
     date: '2026-07-22',
@@ -39,7 +38,6 @@ const posts = [
     excerpt: 'Learn how to test your internet speed, understand ping, download, and upload results, and improve your connection.',
     slug: 'speed-test-guide'
   },
-  // ===== EXISTING POSTS (KEPT) =====
   {
     title: 'The Future of IPv6: What You Need to Know',
     date: '2026-07-15',

@@ -6,8 +6,8 @@ import AffiliateOffer from '../components/AffiliateOffer'
 
 export const metadata = {
   title: 'Learning Center - Learn About IP, Networking & Cybersecurity',
-  description: 'Master networking, cybersecurity, and IP intelligence with our free learning center. Articles, guides, and tutorials for all levels.',
-  keywords: 'learning center, networking basics, cybersecurity, ip address, ccna, ethical hacking',
+  description: 'What is my IP address? Learn how IP addresses work, networking basics, cybersecurity, VPNs, and more. Free guides for beginners and experts.',
+  keywords: 'learning center, networking basics, cybersecurity, ip address, ccna, ethical hacking, what is my ip',
 }
 
 const articles = [
