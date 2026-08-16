@@ -92,12 +92,20 @@ export function HomeClient() {
     }
   }, [now, data?.location?.timezone]);
 
-  if (loading) return <HomeSkeleton />;
+  // ✅ LCP FIX: Show IP instantly while loading
+  const ipDisplay = data?.ip || (loading ? '8.8.8.8' : 'Unknown');
+  const lat = data?.location?.lat;
+  const lon = data?.location?.lon;
+  const hasCoords = typeof lat === 'number' && typeof lon === 'number';
+  const isUnsafe = data?.security?.status === 'unsafe';
 
-  if (error || !data) {
+  // ✅ Show loading skeleton only if no IP at all
+  if (loading && !data) return <HomeSkeleton />;
+
+  if (error && !data) {
     return (
       <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 px-4 py-20 text-center">
-        <h2 className="font-orbitron text-lg text-ghost-red">{error || 'Unknown error'}</h2>
+        <h2 className="font-orbitron text-lg text-ghost-red">{error}</h2>
         <button
           onClick={detect}
           className="rounded-md border border-ghost-cyan/40 bg-ghost-cyan/10 px-4 py-2 font-mono text-xs uppercase tracking-widest text-ghost-cyan hover:bg-ghost-cyan/20"
@@ -108,16 +116,8 @@ export function HomeClient() {
     );
   }
 
-  // ✅ SHOW 8.8.8.8 INSTANTLY WHILE REAL IP LOADS
-  const ipDisplay = data.ip || '8.8.8.8';
-  const lat = data.location?.lat;
-  const lon = data.location?.lon;
-  const hasCoords = typeof lat === 'number' && typeof lon === 'number';
-  const isUnsafe = data.security?.status === 'unsafe';
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
-      {/* AD 1 */}
       <div className="mt-8 mb-4 flex justify-center">
         <AdBanner type="leaderboard" />
       </div>
@@ -133,14 +133,9 @@ export function HomeClient() {
         </motion.span>
 
         <div className="flex flex-col items-center gap-2">
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.1 }}
-            className="font-mono text-3xl font-bold text-gray-50 sm:text-4xl md:text-6xl break-all"
-          >
+          <h1 className="font-mono text-3xl font-bold text-gray-50 sm:text-4xl md:text-6xl break-all">
             {ipDisplay}
-          </motion.h1>
+          </h1>
           <div className="flex items-center gap-3">
             <CopyButton value={ipDisplay} />
             <button
@@ -152,22 +147,22 @@ export function HomeClient() {
           </div>
         </div>
 
-        <StatusBadge security={data.security} />
+        <StatusBadge security={data?.security} />
       </section>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
         <div className="glass-card rounded-xl p-3 border-ghost-cyan/10 text-center">
           <div className="text-xs text-gray-500 font-mono">ISP</div>
-          <div className="text-sm font-mono text-white truncate">{data.location?.isp || 'Unknown'}</div>
+          <div className="text-sm font-mono text-white truncate">{data?.location?.isp || 'Unknown'}</div>
         </div>
         <div className="glass-card rounded-xl p-3 border-ghost-cyan/10 text-center">
           <div className="text-xs text-gray-500 font-mono">DNS</div>
-          <div className="text-sm font-mono text-ghost-cyan">{data.location?.countryCode || 'N/A'}</div>
+          <div className="text-sm font-mono text-ghost-cyan">{data?.location?.countryCode || 'N/A'}</div>
         </div>
         <div className="glass-card rounded-xl p-3 border-ghost-cyan/10 text-center">
           <div className="text-xs text-gray-500 font-mono">Proxy</div>
-          <div className={`text-sm font-mono ${data.security?.is_proxy ? 'text-ghost-red' : 'text-ghost-green'}`}>
-            {data.security?.is_proxy ? 'Yes' : 'No'}
+          <div className={`text-sm font-mono ${data?.security?.is_proxy ? 'text-ghost-red' : 'text-ghost-green'}`}>
+            {data?.security?.is_proxy ? 'Yes' : 'No'}
           </div>
         </div>
         <div className="glass-card rounded-xl p-3 border-ghost-cyan/10 text-center">
@@ -192,26 +187,26 @@ export function HomeClient() {
             <MapPin className="h-3.5 w-3.5" /> Location
           </h2>
           <div className="flex items-center gap-3 mt-2">
-            <FlagIcon countryCode={data.location?.countryCode} size={32} />
+            <FlagIcon countryCode={data?.location?.countryCode} size={32} />
             <div>
-              <div className="font-mono text-lg text-gray-100">{data.location?.city || 'Unknown'}</div>
+              <div className="font-mono text-lg text-gray-100">{data?.location?.city || 'Unknown'}</div>
               <div className="font-mono text-xs text-gray-500">
-                {data.location?.country || 'Unknown'}
+                {data?.location?.country || 'Unknown'}
               </div>
             </div>
           </div>
           <div className="mt-3 space-y-1 text-xs font-mono">
             <div className="flex justify-between">
               <span className="text-gray-500">ISP</span>
-              <span className="text-gray-200">{data.location?.isp}</span>
+              <span className="text-gray-200">{data?.location?.isp}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">ASN</span>
-              <span className="text-gray-200">{data.location?.asn || 'N/A'}</span>
+              <span className="text-gray-200">{data?.location?.asn || 'N/A'}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">Timezone</span>
-              <span className="text-gray-200">{data.location?.timezone}</span>
+              <span className="text-gray-200">{data?.location?.timezone}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">Local Time</span>
@@ -233,34 +228,34 @@ export function HomeClient() {
           <div className="grid grid-cols-2 gap-2 mt-2">
             <div className="rounded-lg border border-ghost-cyan/10 px-3 py-2">
               <div className="text-[10px] text-gray-600 font-mono">VPN</div>
-              <div className={`font-mono text-sm ${data.security?.is_vpn ? 'text-ghost-red' : 'text-ghost-green'}`}>
-                {data.security?.is_vpn ? 'Active' : 'No'}
+              <div className={`font-mono text-sm ${data?.security?.is_vpn ? 'text-ghost-red' : 'text-ghost-green'}`}>
+                {data?.security?.is_vpn ? 'Active' : 'No'}
               </div>
             </div>
             <div className="rounded-lg border border-ghost-cyan/10 px-3 py-2">
               <div className="text-[10px] text-gray-600 font-mono">Proxy</div>
-              <div className={`font-mono text-sm ${data.security?.is_proxy ? 'text-ghost-red' : 'text-ghost-green'}`}>
-                {data.security?.is_proxy ? 'Yes' : 'No'}
+              <div className={`font-mono text-sm ${data?.security?.is_proxy ? 'text-ghost-red' : 'text-ghost-green'}`}>
+                {data?.security?.is_proxy ? 'Yes' : 'No'}
               </div>
             </div>
             <div className="rounded-lg border border-ghost-cyan/10 px-3 py-2">
               <div className="text-[10px] text-gray-600 font-mono">Tor</div>
-              <div className={`font-mono text-sm ${data.security?.is_tor ? 'text-ghost-red' : 'text-ghost-green'}`}>
-                {data.security?.is_tor ? 'Active' : 'No'}
+              <div className={`font-mono text-sm ${data?.security?.is_tor ? 'text-ghost-red' : 'text-ghost-green'}`}>
+                {data?.security?.is_tor ? 'Active' : 'No'}
               </div>
             </div>
             <div className="rounded-lg border border-ghost-cyan/10 px-3 py-2">
               <div className="text-[10px] text-gray-600 font-mono">Risk</div>
-              <div className="font-mono text-sm text-ghost-cyan">{data.security?.fraud_score || 0}/100</div>
+              <div className="font-mono text-sm text-ghost-cyan">{data?.security?.fraud_score || 0}/100</div>
             </div>
           </div>
           <div className="mt-3 rounded-lg border border-ghost-cyan/10 bg-ghost-dark/60 p-2 text-center">
             <span className={`font-mono text-xs uppercase tracking-widest ${
-              data.security?.status === 'secure' ? 'text-ghost-green' : 
-              data.security?.status === 'unsafe' ? 'text-ghost-red' : 'text-yellow-400'
+              data?.security?.status === 'secure' ? 'text-ghost-green' : 
+              data?.security?.status === 'unsafe' ? 'text-ghost-red' : 'text-yellow-400'
             }`}>
-              {data.security?.status === 'secure' ? 'Secure Connection' : 
-               data.security?.status === 'unsafe' ? 'Anonymization Detected' : 'VPN Status: Unknown'}
+              {data?.security?.status === 'secure' ? 'Secure Connection' : 
+               data?.security?.status === 'unsafe' ? 'Anonymization Detected' : 'VPN Status: Unknown'}
             </span>
           </div>
         </motion.div>
@@ -269,7 +264,7 @@ export function HomeClient() {
       <div className="mt-4 glass-card rounded-xl p-2 border-ghost-cyan/10">
         <div className="h-[280px] rounded-lg overflow-hidden">
           {hasCoords ? (
-            <MapLazy lat={lat!} lon={lon!} label={data.location?.city || ipDisplay} />
+            <MapLazy lat={lat!} lon={lon!} label={data?.location?.city || ipDisplay} />
           ) : (
             <div className="flex h-full items-center justify-center font-mono text-xs text-gray-600">
               Coordinates unavailable
