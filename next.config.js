@@ -23,7 +23,7 @@ const nextConfig = {
   compress: true,
   reactStrictMode: true,
 
-  // ✅ CACHE HEADERS
+  // ✅ ONLY CACHE HEADERS – NO INLINE CSS
   async headers() {
     return [
       {
@@ -46,15 +46,6 @@ const nextConfig = {
       },
       {
         source: '/favicon.ico',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/_next/static/css/(.*)',
         headers: [
           {
             key: 'Cache-Control',

@@ -43,7 +43,6 @@ export function generateMetadata(): Metadata {
       type: 'website',
       siteName: 'What Is My IP',
       url: baseUrl,
-      // ✅ ADDED: Social Preview Image (og:image)
       images: [
         {
           url: `${baseUrl}/og-image.png`,
@@ -57,7 +56,6 @@ export function generateMetadata(): Metadata {
       card: 'summary_large_image',
       title: 'What Is My IP Address? - Check IPv4, IPv6, Location & Security',
       description: 'Check your public IP address, location, ISP, ASN, fraud score, VPN status, and more.',
-      // ✅ ADDED: Twitter also uses the same image
       images: [`${baseUrl}/og-image.png`],
     },
   };
@@ -67,9 +65,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${orbitron.variable} ${jetbrainsMono.variable}`}>
       <head>
-        {/* ==========================================
-            ✅ PRECONNECT – Only 2 essential connections
-            ========================================== */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -77,16 +72,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         />
 
-        {/* ==========================================
-            FAVICONS
-            ========================================== */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
         <link rel="apple-touch-icon" href="/favicon.ico" />
 
-        {/* ==========================================
-            ✅ GOOGLE ANALYTICS – lazyOnload (does NOT block rendering)
-            ========================================== */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-WD6G7V39CM"
           strategy="lazyOnload"
@@ -99,15 +88,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-WD6G7V39CM');
           `}
         </Script>
-
-        {/* ==========================================
-            ✅ ADSTERRA – Commented out (will add later with real codes)
-            ========================================== */}
-        {/* <Script
-          id="adsterra-native"
-          strategy="lazyOnload"
-          src="https://pl30498079.effectivecpmnetwork.com/995d18c4798c9af8de26491554ce1723/invoke.js"
-        /> */}
       </head>
       <body className="min-h-screen bg-ghost-dark text-white">
         <ToastProvider>
