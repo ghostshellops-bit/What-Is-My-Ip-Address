@@ -108,7 +108,8 @@ export function HomeClient() {
     );
   }
 
-  const ipDisplay = data.ip || 'Unknown';
+  // ✅ SHOW 8.8.8.8 INSTANTLY WHILE REAL IP LOADS
+  const ipDisplay = data.ip || '8.8.8.8';
   const lat = data.location?.lat;
   const lon = data.location?.lon;
   const hasCoords = typeof lat === 'number' && typeof lon === 'number';
@@ -121,7 +122,6 @@ export function HomeClient() {
         <AdBanner type="leaderboard" />
       </div>
 
-      {/* Main IP Display */}
       <section className="relative flex flex-col items-center gap-4 py-4 text-center">
         <motion.span
           initial={{ opacity: 0, y: -6 }}
@@ -155,7 +155,6 @@ export function HomeClient() {
         <StatusBadge security={data.security} />
       </section>
 
-      {/* Quick Info Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
         <div className="glass-card rounded-xl p-3 border-ghost-cyan/10 text-center">
           <div className="text-xs text-gray-500 font-mono">ISP</div>
@@ -177,12 +176,10 @@ export function HomeClient() {
         </div>
       </div>
 
-      {/* AD 2 */}
       <div className="my-4 flex justify-center">
         <AdBanner type="rectangle" />
       </div>
 
-      {/* Location & Security Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -203,12 +200,24 @@ export function HomeClient() {
               </div>
             </div>
           </div>
-          <dl className="mt-3 space-y-1 text-xs font-mono">
-            <div className="flex justify-between"><span className="text-gray-500">ISP</span><span className="text-gray-200">{data.location?.isp}</span></div>
-            <div className="flex justify-between"><span className="text-gray-500">ASN</span><span className="text-gray-200">{data.location?.asn || 'N/A'}</span></div>
-            <div className="flex justify-between"><span className="text-gray-500">Timezone</span><span className="text-gray-200">{data.location?.timezone}</span></div>
-            <div className="flex justify-between"><span className="text-gray-500">Local Time</span><span className="text-ghost-cyan font-bold">{localTime}</span></div>
-          </dl>
+          <div className="mt-3 space-y-1 text-xs font-mono">
+            <div className="flex justify-between">
+              <span className="text-gray-500">ISP</span>
+              <span className="text-gray-200">{data.location?.isp}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-500">ASN</span>
+              <span className="text-gray-200">{data.location?.asn || 'N/A'}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-500">Timezone</span>
+              <span className="text-gray-200">{data.location?.timezone}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-500">Local Time</span>
+              <span className="text-ghost-cyan font-bold">{localTime}</span>
+            </div>
+          </div>
         </motion.div>
 
         <motion.div
@@ -257,7 +266,6 @@ export function HomeClient() {
         </motion.div>
       </div>
 
-      {/* Map */}
       <div className="mt-4 glass-card rounded-xl p-2 border-ghost-cyan/10">
         <div className="h-[280px] rounded-lg overflow-hidden">
           {hasCoords ? (
@@ -270,12 +278,10 @@ export function HomeClient() {
         </div>
       </div>
 
-      {/* AD 3 */}
       <div className="my-4 flex justify-center">
         <AdBanner type="leaderboard" />
       </div>
 
-      {/* Recent Scans & Tools */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         <div className="md:col-span-1">
           <RecentScans onPick={(ip) => toast(`Re-query ${ip}`, 'info')} />
@@ -301,7 +307,6 @@ export function HomeClient() {
         </div>
       </div>
 
-      {/* AD 4 */}
       <div className="mt-4 flex justify-center">
         <AdBanner type="rectangle" />
       </div>
