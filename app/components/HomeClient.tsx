@@ -118,6 +118,9 @@ export function HomeClient() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
+      {/* ============================================
+          AD 1: LEADERBOARD (728x90)
+          ============================================ */}
       <div className="mt-8 mb-4 flex justify-center">
         <AdBanner type="leaderboard" />
       </div>
@@ -171,6 +174,9 @@ export function HomeClient() {
         </div>
       </div>
 
+      {/* ============================================
+          AD 2: RECTANGLE (300x250)
+          ============================================ */}
       <div className="my-4 flex justify-center">
         <AdBanner type="rectangle" />
       </div>
@@ -261,6 +267,13 @@ export function HomeClient() {
         </motion.div>
       </div>
 
+      {/* ============================================
+          AD 3: NATIVE BANNER (Responsive)
+          ============================================ */}
+      <div className="my-6 flex justify-center">
+        <AdBanner type="native" />
+      </div>
+
       <div className="mt-4 glass-card rounded-xl p-2 border-ghost-cyan/10">
         <div className="h-[280px] rounded-lg overflow-hidden">
           {hasCoords ? (
@@ -273,6 +286,9 @@ export function HomeClient() {
         </div>
       </div>
 
+      {/* ============================================
+          AD 4: LEADERBOARD (728x90)
+          ============================================ */}
       <div className="my-4 flex justify-center">
         <AdBanner type="leaderboard" />
       </div>
@@ -302,6 +318,9 @@ export function HomeClient() {
         </div>
       </div>
 
+      {/* ============================================
+          AD 5: RECTANGLE (300x250) - Bottom
+          ============================================ */}
       <div className="mt-4 flex justify-center">
         <AdBanner type="rectangle" />
       </div>

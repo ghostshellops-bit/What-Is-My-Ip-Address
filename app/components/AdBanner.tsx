@@ -3,46 +3,136 @@
 import { useEffect } from 'react';
 
 interface AdBannerProps {
-  type: 'leaderboard' | 'rectangle' | 'skyscraper' | 'social';
+  type: 'native' | 'leaderboard' | 'rectangle' | 'skyscraper' | 'mobile';
   className?: string;
 }
 
 export default function AdBanner({ type = 'leaderboard', className = '' }: AdBannerProps) {
   useEffect(() => {
     try {
-      console.log('Ad banner loaded:', type);
+      // ==========================================
+      // 1. NATIVE BANNER (Responsive)
+      // ==========================================
+      if (type === 'native') {
+        // Create container if it doesn't exist
+        let container = document.getElementById('container-b690125a61f7b7f4ef6d67d25cade33d');
+        if (!container) {
+          const newContainer = document.createElement('div');
+          newContainer.id = 'container-b690125a61f7b7f4ef6d67d25cade33d';
+          const parent = document.querySelector('.ad-container');
+          if (parent) {
+            parent.appendChild(newContainer);
+          }
+        }
+        
+        const script = document.createElement('script');
+        script.async = true;
+        script.setAttribute('data-cfasync', 'false');
+        script.src = 'https://pl30882513.effectivecpmnetwork.com/b690125a61f7b7f4ef6d67d25cade33d/invoke.js';
+        document.body.appendChild(script);
+      }
+
+      // ==========================================
+      // 2. LEADERBOARD - 728x90
+      // ==========================================
+      if (type === 'leaderboard') {
+        const s1 = document.createElement('script');
+        s1.innerHTML = `
+          atOptions = {
+            'key' : '93f926b3be881e3571fb55049087e2d5',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+          };
+        `;
+        document.head.appendChild(s1);
+        const s2 = document.createElement('script');
+        s2.src = 'https://www.highperformanceformat.com/93f926b3be881e3571fb55049087e2d5/invoke.js';
+        document.body.appendChild(s2);
+      }
+
+      // ==========================================
+      // 3. RECTANGLE - 300x250
+      // ==========================================
+      if (type === 'rectangle') {
+        const s1 = document.createElement('script');
+        s1.innerHTML = `
+          atOptions = {
+            'key' : '962f19dabcc463b4c39ffe6d5f169807',
+            'format' : 'iframe',
+            'height' : 250,
+            'width' : 300,
+            'params' : {}
+          };
+        `;
+        document.head.appendChild(s1);
+        const s2 = document.createElement('script');
+        s2.src = 'https://www.highperformanceformat.com/962f19dabcc463b4c39ffe6d5f169807/invoke.js';
+        document.body.appendChild(s2);
+      }
+
+      // ==========================================
+      // 4. SKYSCRAPER - 160x600
+      // ==========================================
+      if (type === 'skyscraper') {
+        const s1 = document.createElement('script');
+        s1.innerHTML = `
+          atOptions = {
+            'key' : '501685e48da3d5bd81efb4602695e21f',
+            'format' : 'iframe',
+            'height' : 600,
+            'width' : 160,
+            'params' : {}
+          };
+        `;
+        document.head.appendChild(s1);
+        const s2 = document.createElement('script');
+        s2.src = 'https://www.highperformanceformat.com/501685e48da3d5bd81efb4602695e21f/invoke.js';
+        document.body.appendChild(s2);
+      }
+
+      // ==========================================
+      // 5. MOBILE - 320x50
+      // ==========================================
+      if (type === 'mobile') {
+        const s1 = document.createElement('script');
+        s1.innerHTML = `
+          atOptions = {
+            'key' : 'a56c67f58ec5272d7683872900e65529',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+          };
+        `;
+        document.head.appendChild(s1);
+        const s2 = document.createElement('script');
+        s2.src = 'https://www.highperformanceformat.com/a56c67f58ec5272d7683872900e65529/invoke.js';
+        document.body.appendChild(s2);
+      }
     } catch (e) {
-      console.error('Ad banner error:', e);
+      console.error('Ad error:', e);
     }
   }, [type]);
 
-  const getBannerStyles = () => {
-    switch (type) {
-      case 'leaderboard':
-        return { width: '728px', height: '90px', maxWidth: '100%' };
-      case 'rectangle':
-        return { width: '300px', height: '250px', maxWidth: '100%' };
-      case 'skyscraper':
-        return { width: '160px', height: '600px', maxWidth: '100%' };
-      case 'social':
-        return { width: '100%', height: '60px' };
-      default:
-        return { width: '728px', height: '90px', maxWidth: '100%' };
-    }
+  const styles: Record<string, React.CSSProperties> = {
+    native: { width: '100%', minHeight: '120px' },
+    leaderboard: { width: '728px', height: '90px', maxWidth: '100%' },
+    rectangle: { width: '300px', height: '250px', maxWidth: '100%' },
+    skyscraper: { width: '160px', height: '600px', maxWidth: '100%' },
+    mobile: { width: '320px', height: '50px', maxWidth: '100%' },
   };
 
   return (
     <div
-      className={`glass-card rounded-xl border-ghost-cyan/10 bg-ghost-dark/30 flex items-center justify-center overflow-hidden ${className}`}
-      style={getBannerStyles()}
+      className={`flex items-center justify-center overflow-hidden ${className}`}
+      style={styles[type] || styles.leaderboard}
     >
-      <div className="text-center">
-        <div className="text-xs text-gray-500 font-mono">
-          📢 Adsterra Banner ({type})
-          <br />
-          <span className="text-[8px] text-gray-600">(Replace with your Adsterra code)</span>
-        </div>
-      </div>
+      {/* Native Banner Container */}
+      {type === 'native' && (
+        <div id="container-b690125a61f7b7f4ef6d67d25cade33d" />
+      )}
     </div>
   );
 }
