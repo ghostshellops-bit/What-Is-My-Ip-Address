@@ -116,7 +116,7 @@ export function HomeClient() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
-      {/* ==== AD 1: LEADERBOARD – added mt-8 for spacing ==== */}
+      {/* AD 1 */}
       <div className="mt-8 mb-4 flex justify-center">
         <AdBanner type="leaderboard" />
       </div>
@@ -133,13 +133,14 @@ export function HomeClient() {
         </motion.span>
 
         <div className="flex flex-col items-center gap-2">
-          {/* ✅ LCP FIX: IP text loads instantly */}
-          <h1
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.1 }}
             className="font-mono text-3xl font-bold text-gray-50 sm:text-4xl md:text-6xl break-all"
-            fetchPriority="high"
           >
             {ipDisplay}
-          </h1>
+          </motion.h1>
           <div className="flex items-center gap-3">
             <CopyButton value={ipDisplay} />
             <button
@@ -154,7 +155,7 @@ export function HomeClient() {
         <StatusBadge security={data.security} />
       </section>
 
-      {/* Quick Info Grid - Clean & Compact */}
+      {/* Quick Info Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
         <div className="glass-card rounded-xl p-3 border-ghost-cyan/10 text-center">
           <div className="text-xs text-gray-500 font-mono">ISP</div>
@@ -176,12 +177,12 @@ export function HomeClient() {
         </div>
       </div>
 
-      {/* ==== AD 2: RECTANGLE ==== */}
+      {/* AD 2 */}
       <div className="my-4 flex justify-center">
         <AdBanner type="rectangle" />
       </div>
 
-      {/* Location & Security - Side by Side */}
+      {/* Location & Security Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -269,7 +270,7 @@ export function HomeClient() {
         </div>
       </div>
 
-      {/* ==== AD 3: LEADERBOARD ==== */}
+      {/* AD 3 */}
       <div className="my-4 flex justify-center">
         <AdBanner type="leaderboard" />
       </div>
@@ -300,7 +301,7 @@ export function HomeClient() {
         </div>
       </div>
 
-      {/* ==== AD 4: RECTANGLE ==== */}
+      {/* AD 4 */}
       <div className="mt-4 flex justify-center">
         <AdBanner type="rectangle" />
       </div>
