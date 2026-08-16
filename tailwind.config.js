@@ -17,6 +17,9 @@ module.exports = {
         'ghost-red': '#FF0040',
         'ghost-green': '#00FF41',
         'ghost-purple': '#9B59B6',
+        'gray-400': '#B0B0B0',  // ✅ FIXED CONTRAST
+        'gray-500': '#A0A0A0',  // ✅ FIXED CONTRAST
+        'gray-600': '#888888',  // ✅ FIXED CONTRAST
       },
       boxShadow: {
         'glow-cyan': '0 0 40px -5px rgba(0, 240, 255, 0.3)',

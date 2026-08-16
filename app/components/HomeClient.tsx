@@ -184,9 +184,10 @@ export function HomeClient() {
       {/* Location & Security - Side by Side */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
         <div className="glass-card rounded-xl p-4 border-ghost-cyan/10">
-          <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-gray-500">
+          {/* ✅ FIXED: h3 → h2 */}
+          <h2 className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-gray-500">
             <MapPin className="h-3.5 w-3.5" /> Location
-          </h3>
+          </h2>
           <div className="flex items-center gap-3 mt-2">
             <FlagIcon countryCode={data.location?.countryCode} size={32} />
             <div>
@@ -197,17 +198,30 @@ export function HomeClient() {
             </div>
           </div>
           <dl className="mt-3 space-y-1 text-xs font-mono">
-            <div className="flex justify-between"><span className="text-gray-500">ISP</span><span className="text-gray-200">{data.location?.isp}</span></div>
-            <div className="flex justify-between"><span className="text-gray-500">ASN</span><span className="text-gray-200">{data.location?.asn || 'N/A'}</span></div>
-            <div className="flex justify-between"><span className="text-gray-500">Timezone</span><span className="text-gray-200">{data.location?.timezone}</span></div>
-            <div className="flex justify-between"><span className="text-gray-500">Local Time</span><span className="text-ghost-cyan font-bold">{localTime}</span></div>
+            <div className="flex justify-between">
+              <span className="text-gray-500">ISP</span>
+              <span className="text-gray-200">{data.location?.isp}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-500">ASN</span>
+              <span className="text-gray-200">{data.location?.asn || 'N/A'}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-500">Timezone</span>
+              <span className="text-gray-200">{data.location?.timezone}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-500">Local Time</span>
+              <span className="text-ghost-cyan font-bold">{localTime}</span>
+            </div>
           </dl>
         </div>
 
         <div className="glass-card rounded-xl p-4 border-ghost-cyan/10">
-          <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-gray-500">
+          {/* ✅ FIXED: h3 → h2 */}
+          <h2 className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-gray-500">
             <ShieldAlert className="h-3.5 w-3.5" /> Security
-          </h3>
+          </h2>
           <div className="grid grid-cols-2 gap-2 mt-2">
             <div className="rounded-lg border border-ghost-cyan/10 px-3 py-2">
               <div className="text-[10px] text-gray-600 font-mono">VPN</div>
@@ -233,12 +247,20 @@ export function HomeClient() {
             </div>
           </div>
           <div className="mt-3 rounded-lg border border-ghost-cyan/10 bg-ghost-dark/60 p-2 text-center">
-            <span className={`font-mono text-xs uppercase tracking-widest ${
-              data.security?.status === 'secure' ? 'text-ghost-green' : 
-              data.security?.status === 'unsafe' ? 'text-ghost-red' : 'text-yellow-400'
-            }`}>
-              {data.security?.status === 'secure' ? 'Secure Connection' : 
-               data.security?.status === 'unsafe' ? 'Anonymization Detected' : 'VPN Status: Unknown'}
+            <span
+              className={`font-mono text-xs uppercase tracking-widest ${
+                data.security?.status === 'secure'
+                  ? 'text-ghost-green'
+                  : data.security?.status === 'unsafe'
+                  ? 'text-ghost-red'
+                  : 'text-yellow-400'
+              }`}
+            >
+              {data.security?.status === 'secure'
+                ? 'Secure Connection'
+                : data.security?.status === 'unsafe'
+                ? 'Anonymization Detected'
+                : 'VPN Status: Unknown'}
             </span>
           </div>
         </div>
@@ -279,8 +301,14 @@ export function HomeClient() {
                 { name: 'Speed Test', href: '/speed-test' },
                 { name: 'Bulk Lookup', href: '/bulk-ip-lookup' },
               ].map((tool) => (
-                <a key={tool.name} href={tool.href} className="glass-card rounded-lg p-2 border-ghost-cyan/10 hover:border-ghost-cyan/40 transition-all text-center group">
-                  <div className="text-[10px] font-mono text-gray-300 group-hover:text-ghost-cyan">{tool.name}</div>
+                <a
+                  key={tool.name}
+                  href={tool.href}
+                  className="glass-card rounded-lg p-2 border-ghost-cyan/10 hover:border-ghost-cyan/40 transition-all text-center group"
+                >
+                  <div className="text-[10px] font-mono text-gray-300 group-hover:text-ghost-cyan">
+                    {tool.name}
+                  </div>
                 </a>
               ))}
             </div>
