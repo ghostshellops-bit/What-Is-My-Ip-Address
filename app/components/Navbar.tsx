@@ -40,6 +40,8 @@ export default function Navbar() {
                 alt="What Is My IP"
                 fill
                 className="object-contain p-1"
+                priority  // ✅ ADDED – loads first for LCP
+                sizes="48px"  // ✅ ADDED – prevents oversized image
               />
             </div>
             <div className="hidden md:block">

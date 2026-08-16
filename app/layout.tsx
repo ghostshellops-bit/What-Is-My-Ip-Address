@@ -34,7 +34,7 @@ function getBaseUrl() {
 }
 
 // ============================================
-// METADATA WITH AUTO-DETECTED URL
+// DATA WITH AUTO-DETECTED URL
 // ============================================
 export function generateMetadata(): Metadata {
   const baseUrl = getBaseUrl();
@@ -120,9 +120,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-WD6G7V39CM"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -133,7 +133,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <Script
           id="adsterra-native"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://pl30498079.effectivecpmnetwork.com/995d18c4798c9af8de26491554ce1723/invoke.js"
           async
           data-cfasync="false"

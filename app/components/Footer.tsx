@@ -70,6 +70,8 @@ export default function Footer() {
                   alt="What Is My IP"
                   fill
                   className="object-contain p-1"
+                  loading="eager"  // ✅ ADDED – loads immediately
+                  sizes="56px"      // ✅ ADDED – prevents oversized image
                 />
               </div>
               <div>
