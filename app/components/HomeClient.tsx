@@ -126,17 +126,19 @@ export function HomeClient() {
         <motion.span
           initial={{ opacity: 0, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.1 }}
           className="font-mono text-xs uppercase tracking-[0.3em] text-ghost-cyan/80"
         >
           // Live IP Radar
         </motion.span>
 
         <div className="flex flex-col items-center gap-2">
+          {/* ✅ LCP FIX: IP text loads instantly */}
           <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            className="font-mono text-4xl font-bold text-gray-50 sm:text-5xl md:text-6xl break-all"
+            transition={{ duration: 0.1 }}
+            className="font-mono text-3xl font-bold text-gray-50 sm:text-4xl md:text-6xl break-all"
           >
             {ipDisplay}
           </motion.h1>
@@ -183,8 +185,13 @@ export function HomeClient() {
 
       {/* Location & Security - Side by Side */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-        <div className="glass-card rounded-xl p-4 border-ghost-cyan/10">
-          {/* ✅ FIXED: h3 → h2 */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0, duration: 0.2 }}
+          viewport={{ once: true }}
+          className={cn('glass rounded-xl p-4', isUnsafe && 'glass-danger')}
+        >
           <h2 className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-gray-500">
             <MapPin className="h-3.5 w-3.5" /> Location
           </h2>
@@ -198,27 +205,20 @@ export function HomeClient() {
             </div>
           </div>
           <dl className="mt-3 space-y-1 text-xs font-mono">
-            <div className="flex justify-between">
-              <span className="text-gray-500">ISP</span>
-              <span className="text-gray-200">{data.location?.isp}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-500">ASN</span>
-              <span className="text-gray-200">{data.location?.asn || 'N/A'}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-500">Timezone</span>
-              <span className="text-gray-200">{data.location?.timezone}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-500">Local Time</span>
-              <span className="text-ghost-cyan font-bold">{localTime}</span>
-            </div>
+            <div className="flex justify-between"><span className="text-gray-500">ISP</span><span className="text-gray-200">{data.location?.isp}</span></div>
+            <div className="flex justify-between"><span className="text-gray-500">ASN</span><span className="text-gray-200">{data.location?.asn || 'N/A'}</span></div>
+            <div className="flex justify-between"><span className="text-gray-500">Timezone</span><span className="text-gray-200">{data.location?.timezone}</span></div>
+            <div className="flex justify-between"><span className="text-gray-500">Local Time</span><span className="text-ghost-cyan font-bold">{localTime}</span></div>
           </dl>
-        </div>
+        </motion.div>
 
-        <div className="glass-card rounded-xl p-4 border-ghost-cyan/10">
-          {/* ✅ FIXED: h3 → h2 */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0, duration: 0.2 }}
+          viewport={{ once: true }}
+          className={cn('glass rounded-xl p-4', isUnsafe && 'glass-danger')}
+        >
           <h2 className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-gray-500">
             <ShieldAlert className="h-3.5 w-3.5" /> Security
           </h2>
@@ -247,23 +247,15 @@ export function HomeClient() {
             </div>
           </div>
           <div className="mt-3 rounded-lg border border-ghost-cyan/10 bg-ghost-dark/60 p-2 text-center">
-            <span
-              className={`font-mono text-xs uppercase tracking-widest ${
-                data.security?.status === 'secure'
-                  ? 'text-ghost-green'
-                  : data.security?.status === 'unsafe'
-                  ? 'text-ghost-red'
-                  : 'text-yellow-400'
-              }`}
-            >
-              {data.security?.status === 'secure'
-                ? 'Secure Connection'
-                : data.security?.status === 'unsafe'
-                ? 'Anonymization Detected'
-                : 'VPN Status: Unknown'}
+            <span className={`font-mono text-xs uppercase tracking-widest ${
+              data.security?.status === 'secure' ? 'text-ghost-green' : 
+              data.security?.status === 'unsafe' ? 'text-ghost-red' : 'text-yellow-400'
+            }`}>
+              {data.security?.status === 'secure' ? 'Secure Connection' : 
+               data.security?.status === 'unsafe' ? 'Anonymization Detected' : 'VPN Status: Unknown'}
             </span>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Map */}
@@ -301,14 +293,8 @@ export function HomeClient() {
                 { name: 'Speed Test', href: '/speed-test' },
                 { name: 'Bulk Lookup', href: '/bulk-ip-lookup' },
               ].map((tool) => (
-                <a
-                  key={tool.name}
-                  href={tool.href}
-                  className="glass-card rounded-lg p-2 border-ghost-cyan/10 hover:border-ghost-cyan/40 transition-all text-center group"
-                >
-                  <div className="text-[10px] font-mono text-gray-300 group-hover:text-ghost-cyan">
-                    {tool.name}
-                  </div>
+                <a key={tool.name} href={tool.href} className="glass-card rounded-lg p-2 border-ghost-cyan/10 hover:border-ghost-cyan/40 transition-all text-center group">
+                  <div className="text-[10px] font-mono text-gray-300 group-hover:text-ghost-cyan">{tool.name}</div>
                 </a>
               ))}
             </div>
