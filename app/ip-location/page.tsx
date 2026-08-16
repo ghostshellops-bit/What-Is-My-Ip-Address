@@ -6,26 +6,12 @@ import Link from 'next/link';
 import { ArrowRight, Search } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
-// Ad components
-import NativeBanner from '@/components/Ads/NativeBanner';
+// ✅ Use your existing Map component
+import Map from '../components/Map';
 import Banner728x90 from '@/components/Ads/Banner728x90';
 import Banner300x250 from '@/components/Ads/Banner300x250';
 import Banner160x300 from '@/components/Ads/Banner160x300';
-
-const Map = dynamic(
-  () => import('@/components/Map'),
-  { ssr: false, loading: () => <div className="skeleton h-64 w-full rounded-xl" /> }
-);
-
-// Helper to get flag emoji fallback
-const getFlagEmoji = (countryCode: string) => {
-  if (!countryCode) return '🏳️';
-  const codePoints = countryCode
-    .toUpperCase()
-    .split('')
-    .map(char => 127397 + char.charCodeAt(0));
-  return String.fromCodePoint(...codePoints);
-};
+import NativeBanner from '@/components/Ads/NativeBanner';
 
 export default function IPLocationPage() {
   const [ipInput, setIpInput] = useState('8.8.8.8');
@@ -151,7 +137,7 @@ export default function IPLocationPage() {
                       className="w-8 h-6 mx-auto object-cover rounded border border-gray-700"
                     />
                   ) : (
-                    <div className="text-2xl mb-1">{getFlagEmoji(countryCode)}</div>
+                    <div className="text-2xl mb-1">🏳️</div>
                   )}
                   <div className="text-xs text-gray-500 font-mono">Country</div>
                   <div className="text-sm font-mono text-white">{country}</div>
@@ -175,7 +161,7 @@ export default function IPLocationPage() {
                 </div>
               </div>
 
-              {/* Map */}
+              {/* Map – using your existing Map component */}
               <div className="mt-6 h-64 md:h-80 rounded-xl overflow-hidden border border-ghost-cyan/10">
                 <Map lat={lat} lon={lon} city={city} country={country} />
               </div>
