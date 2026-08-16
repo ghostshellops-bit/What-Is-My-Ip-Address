@@ -119,7 +119,7 @@ export function HomeClient() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
       {/* ============================================
-          AD 1: LEADERBOARD (728x90)
+          AD 1: LEADERBOARD (728x90) – TOP
           ============================================ */}
       <div className="mt-8 mb-4 flex justify-center">
         <AdBanner type="leaderboard" />
@@ -175,9 +175,9 @@ export function HomeClient() {
       </div>
 
       {/* ============================================
-          AD 2: RECTANGLE (300x250)
+          AD 2: RECTANGLE (300x250) – BETWEEN SECTIONS
           ============================================ */}
-      <div className="my-4 flex justify-center">
+      <div className="my-6 flex justify-center">
         <AdBanner type="rectangle" />
       </div>
 
@@ -268,7 +268,7 @@ export function HomeClient() {
       </div>
 
       {/* ============================================
-          AD 3: NATIVE BANNER (Responsive)
+          AD 3: NATIVE BANNER – BEFORE MAP (LANDSCAPE)
           ============================================ */}
       <div className="my-6 flex justify-center">
         <AdBanner type="native" />
@@ -287,9 +287,9 @@ export function HomeClient() {
       </div>
 
       {/* ============================================
-          AD 4: LEADERBOARD (728x90)
+          AD 4: LEADERBOARD (728x90) – AFTER MAP
           ============================================ */}
-      <div className="my-4 flex justify-center">
+      <div className="my-6 flex justify-center">
         <AdBanner type="leaderboard" />
       </div>
 
@@ -319,9 +319,9 @@ export function HomeClient() {
       </div>
 
       {/* ============================================
-          AD 5: RECTANGLE (300x250) - Bottom
+          AD 5: RECTANGLE (300x250) – BOTTOM
           ============================================ */}
-      <div className="mt-4 flex justify-center">
+      <div className="mt-6 flex justify-center">
         <AdBanner type="rectangle" />
       </div>
     </div>
