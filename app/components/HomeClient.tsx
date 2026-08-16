@@ -108,8 +108,7 @@ export function HomeClient() {
     );
   }
 
-  // ✅ LCP FIX: Show 8.8.8.8 instantly if no IP yet
-  const ipDisplay = data.ip || '8.8.8.8';
+  const ipDisplay = data.ip || 'Unknown';
   const lat = data.location?.lat;
   const lon = data.location?.lon;
   const hasCoords = typeof lat === 'number' && typeof lon === 'number';
