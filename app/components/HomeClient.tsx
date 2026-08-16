@@ -203,24 +203,11 @@ export function HomeClient() {
               </div>
             </div>
           </div>
-          {/* ✅ FIX: Keep <dl> but use ONLY dt and dd */}
           <dl className="mt-3 space-y-1 text-xs font-mono">
-            <div className="flex justify-between">
-              <dt className="text-gray-500">ISP</dt>
-              <dd className="text-gray-200">{data.location?.isp}</dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-gray-500">ASN</dt>
-              <dd className="text-gray-200">{data.location?.asn || 'N/A'}</dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-gray-500">Timezone</dt>
-              <dd className="text-gray-200">{data.location?.timezone}</dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-gray-500">Local Time</dt>
-              <dd className="text-ghost-cyan font-bold">{localTime}</dd>
-            </div>
+            <div className="flex justify-between"><span className="text-gray-500">ISP</span><span className="text-gray-200">{data.location?.isp}</span></div>
+            <div className="flex justify-between"><span className="text-gray-500">ASN</span><span className="text-gray-200">{data.location?.asn || 'N/A'}</span></div>
+            <div className="flex justify-between"><span className="text-gray-500">Timezone</span><span className="text-gray-200">{data.location?.timezone}</span></div>
+            <div className="flex justify-between"><span className="text-gray-500">Local Time</span><span className="text-ghost-cyan font-bold">{localTime}</span></div>
           </dl>
         </motion.div>
 
