@@ -40,7 +40,7 @@ export default function Navbar() {
               alt="What Is My IP"
               fill
               className="object-contain p-1"
-              loading="eager"  // ✅ Changed from priority
+              loading="lazy"  // ✅ Changed from priority
               sizes="48px"
               />
 

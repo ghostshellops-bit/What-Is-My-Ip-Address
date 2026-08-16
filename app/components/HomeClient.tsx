@@ -134,14 +134,12 @@ export function HomeClient() {
 
         <div className="flex flex-col items-center gap-2">
           {/* ✅ LCP FIX: IP text loads instantly */}
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.1 }}
+          <h1
             className="font-mono text-3xl font-bold text-gray-50 sm:text-4xl md:text-6xl break-all"
+            fetchPriority="high"
           >
             {ipDisplay}
-          </motion.h1>
+          </h1>
           <div className="flex items-center gap-3">
             <CopyButton value={ipDisplay} />
             <button
