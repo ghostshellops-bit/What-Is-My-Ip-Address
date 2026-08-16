@@ -11,20 +11,9 @@ export default function AdBanner({ type = 'leaderboard', className = '' }: AdBan
   useEffect(() => {
     try {
       // ==========================================
-      // 1. NATIVE BANNER (Responsive)
+      // NATIVE BANNER (Working)
       // ==========================================
       if (type === 'native') {
-        // Create container if it doesn't exist
-        let container = document.getElementById('container-b690125a61f7b7f4ef6d67d25cade33d');
-        if (!container) {
-          const newContainer = document.createElement('div');
-          newContainer.id = 'container-b690125a61f7b7f4ef6d67d25cade33d';
-          const parent = document.querySelector('.ad-container');
-          if (parent) {
-            parent.appendChild(newContainer);
-          }
-        }
-        
         const script = document.createElement('script');
         script.async = true;
         script.setAttribute('data-cfasync', 'false');
@@ -33,11 +22,11 @@ export default function AdBanner({ type = 'leaderboard', className = '' }: AdBan
       }
 
       // ==========================================
-      // 2. LEADERBOARD - 728x90
+      // LEADERBOARD - 728x90 (Fixed)
       // ==========================================
       if (type === 'leaderboard') {
-        const s1 = document.createElement('script');
-        s1.innerHTML = `
+        const script = document.createElement('script');
+        script.innerHTML = `
           atOptions = {
             'key' : '93f926b3be881e3571fb55049087e2d5',
             'format' : 'iframe',
@@ -46,18 +35,19 @@ export default function AdBanner({ type = 'leaderboard', className = '' }: AdBan
             'params' : {}
           };
         `;
-        document.head.appendChild(s1);
-        const s2 = document.createElement('script');
-        s2.src = 'https://www.highperformanceformat.com/93f926b3be881e3571fb55049087e2d5/invoke.js';
-        document.body.appendChild(s2);
+        document.head.appendChild(script);
+        
+        const invoke = document.createElement('script');
+        invoke.src = 'https://www.highperformanceformat.com/93f926b3be881e3571fb55049087e2d5/invoke.js';
+        document.body.appendChild(invoke);
       }
 
       // ==========================================
-      // 3. RECTANGLE - 300x250
+      // RECTANGLE - 300x250 (Fixed)
       // ==========================================
       if (type === 'rectangle') {
-        const s1 = document.createElement('script');
-        s1.innerHTML = `
+        const script = document.createElement('script');
+        script.innerHTML = `
           atOptions = {
             'key' : '962f19dabcc463b4c39ffe6d5f169807',
             'format' : 'iframe',
@@ -66,18 +56,19 @@ export default function AdBanner({ type = 'leaderboard', className = '' }: AdBan
             'params' : {}
           };
         `;
-        document.head.appendChild(s1);
-        const s2 = document.createElement('script');
-        s2.src = 'https://www.highperformanceformat.com/962f19dabcc463b4c39ffe6d5f169807/invoke.js';
-        document.body.appendChild(s2);
+        document.head.appendChild(script);
+        
+        const invoke = document.createElement('script');
+        invoke.src = 'https://www.highperformanceformat.com/962f19dabcc463b4c39ffe6d5f169807/invoke.js';
+        document.body.appendChild(invoke);
       }
 
       // ==========================================
-      // 4. SKYSCRAPER - 160x600
+      // SKYSCRAPER - 160x600 (Fixed)
       // ==========================================
       if (type === 'skyscraper') {
-        const s1 = document.createElement('script');
-        s1.innerHTML = `
+        const script = document.createElement('script');
+        script.innerHTML = `
           atOptions = {
             'key' : '501685e48da3d5bd81efb4602695e21f',
             'format' : 'iframe',
@@ -86,18 +77,19 @@ export default function AdBanner({ type = 'leaderboard', className = '' }: AdBan
             'params' : {}
           };
         `;
-        document.head.appendChild(s1);
-        const s2 = document.createElement('script');
-        s2.src = 'https://www.highperformanceformat.com/501685e48da3d5bd81efb4602695e21f/invoke.js';
-        document.body.appendChild(s2);
+        document.head.appendChild(script);
+        
+        const invoke = document.createElement('script');
+        invoke.src = 'https://www.highperformanceformat.com/501685e48da3d5bd81efb4602695e21f/invoke.js';
+        document.body.appendChild(invoke);
       }
 
       // ==========================================
-      // 5. MOBILE - 320x50
+      // MOBILE - 320x50 (Fixed)
       // ==========================================
       if (type === 'mobile') {
-        const s1 = document.createElement('script');
-        s1.innerHTML = `
+        const script = document.createElement('script');
+        script.innerHTML = `
           atOptions = {
             'key' : 'a56c67f58ec5272d7683872900e65529',
             'format' : 'iframe',
@@ -106,10 +98,11 @@ export default function AdBanner({ type = 'leaderboard', className = '' }: AdBan
             'params' : {}
           };
         `;
-        document.head.appendChild(s1);
-        const s2 = document.createElement('script');
-        s2.src = 'https://www.highperformanceformat.com/a56c67f58ec5272d7683872900e65529/invoke.js';
-        document.body.appendChild(s2);
+        document.head.appendChild(script);
+        
+        const invoke = document.createElement('script');
+        invoke.src = 'https://www.highperformanceformat.com/a56c67f58ec5272d7683872900e65529/invoke.js';
+        document.body.appendChild(invoke);
       }
     } catch (e) {
       console.error('Ad error:', e);
